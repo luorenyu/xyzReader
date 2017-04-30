@@ -66,6 +66,7 @@
             android:paddingBottom="28dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
     <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
         app:elevation="12dp"
         android:clickable="true"
         android:layout_gravity="bottom|end"
