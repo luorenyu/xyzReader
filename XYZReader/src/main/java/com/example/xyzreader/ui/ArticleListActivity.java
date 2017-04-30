@@ -1,6 +1,5 @@
 package com.example.xyzreader.ui;
 
-import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +39,7 @@ import java.util.GregorianCalendar;
  * activity presents a grid of items as cards.
  */
 public class ArticleListActivity extends ActionBarActivity implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+    LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = ArticleListActivity.class.toString();
     private Toolbar mToolbar;
@@ -65,7 +65,7 @@ public class ArticleListActivity extends ActionBarActivity implements
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        getLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
             refresh();
@@ -105,26 +105,27 @@ public class ArticleListActivity extends ActionBarActivity implements
         mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+    @Override public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return ArticleLoader.newAllArticlesInstance(this);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor cursor) {
         Adapter adapter = new Adapter(cursor);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
         int columnCount = getResources().getInteger(R.integer.list_column_count);
         StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+            new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sglm);
     }
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    @Override public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
         mRecyclerView.setAdapter(null);
     }
+
+
+
 
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private Cursor mCursor;
