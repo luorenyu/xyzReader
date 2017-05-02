@@ -55,18 +55,4 @@
             android:paddingRight="@dimen/list_side_margin"
             android:paddingBottom="28dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
-        app:elevation="12dp"
-        android:clickable="true"
-        android:layout_gravity="bottom|end"
-        android:scaleType="center"
-        app:backgroundTint="@color/theme_accent"
-        app:rippleColor="@color/theme_accent_tran"
-        android:src="@drawable/ic_action_search"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-    />
 </android.support.design.widget.CoordinatorLayout>
